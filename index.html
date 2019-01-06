@@ -1,0 +1,85 @@
+<!doctype <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Vowel Checker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <style>
+            h1, p{
+                color: blue;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container ">
+            <div class="row hcolor">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3 ">
+                        <h1>Vowel Checker</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <p>Enter the word to be checked</p>
+                    <input type="text" class="form-control" id="validationDefault01 word" placeholder="" value="" required>
+                </div>
+            </div>     
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-primary ml-3 mb-3 mt-3 sbox" id="countVowel" type="enter">Enter</button>
+                    <p id="displayCount"></p>
+                </div>
+                <div class="col-md-2 ">
+                    <button class="btn btn-primary ml-5 mb-3 mt-3 sbox" id="clear" type="again">New word</button>
+                </div>
+            </div>  
+        </div>  
+
+        <script type="text/javascript">
+            var letter="", word=[], count;
+            $(document).ready(function() {
+                
+                function vowelcount(word){
+                    var vowel=['a','e','i','o','u'];
+                    count=0;
+                    for(var i=0;i<vowel.length;i++){
+                        if((word.indexOf(vowel[i]))>=0){
+                            count++;
+                        }
+                    }
+                    return count;
+                }
+
+                document.onkeyup = function(evt) {
+                    evt = evt || window.event;
+                    var charCode = evt.which || evt.keyCode;
+                    var charStr = String.fromCharCode(charCode);
+                    if (/[a-z]/i.test(charStr)) {
+                        word.push(event.key.toLowerCase());
+                    }
+                    $("#word").text(word.join(" "));
+                    
+                    if(evt.keyCode===8){
+                        word.pop();
+                        $("#word").text(word.join(" "));
+                    }
+                };
+                $(("#countVowel")).on("click", function() {   
+                    count=vowelcount(word);
+                    var txt="Number of vowels: "+count;
+                    $("#displayCount").text(txt);
+                });
+                $(("#clear")).on("click", function() {   
+                    location.reload();
+                });
+            });
+
+        </script>
+    </body>
+</html>
